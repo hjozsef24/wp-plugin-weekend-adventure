@@ -2,21 +2,38 @@ const renderProgramCard = (program) => {
 	const status = program.status;
 
 	return `
-		<article class="wa__card__program">
-			<h3>${program.title}</h3>
+		<article class="wa__card">
+			<h3 class="wa__card__title">${program.title}</h3>
 
-			<p>${program.location}</p>
-			<p>${program.start_at}</p>
-			<p>${program.difficulty ?? '-'}</p>
-			<p>${program.price_huf}</p>
+			<dl class="wa__card__details">
+				<div>
+					<dt>Helyszín</dt>
+					<dd>${program.location}</dd>
+				</div>
 
-			<div class="wa__status wa__status--${status.key}">
+				<div>
+					<dt>Időpont</dt>
+					<dd>${program.start_at}</dd>
+				</div>
+
+				<div>
+					<dt>Nehézség</dt>
+					<dd>${program.difficulty ?? 'Nincs megadva'}</dd>
+				</div>
+
+				<div>
+					<dt>Ár</dt>
+					<dd>${program.price_huf}</dd>
+				</div>
+			</dl>
+
+			<p class="wa__card__status wa__card__status--${status.key}">
 				${status.label}
-			</div>
+			</p>
 
 			${status.bookable
-			? '<button type="button">Foglalás</button>'
-			: '<button type="button" disabled>Nem foglalható</button>'
+			? '<button type="button" class="wa__card__cta">Foglalás</button>'
+			: '<button type="button" class="wa__card__cta" disabled>Nem foglalható</button>'
 		}
 		</article>
 	`;
@@ -43,7 +60,7 @@ const programList = ($) => {
 				return;
 			}
 
-			difficultyFilterWrapper.css("display", "block")
+			difficultyFilterWrapper.css("display", "flex")
 			container.html(
 				programs.map(renderProgramCard).join('')
 			);

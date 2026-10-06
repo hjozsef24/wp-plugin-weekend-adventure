@@ -1,8 +1,150 @@
-.wa__title {
-	font-size: 32px;
-	color: #333;
+.wa__section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 }
 
-.wa__filter{
+.wa__title {
+    margin: 0 0 24px;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #333;
+}
+
+.wa__filter {
     display: none;
+    align-items: center;
+    gap: 16px;
+}
+
+.wa__filter label {
+    display: block;
+    font-weight: 500;
+}
+
+.wa__filter select {
+    min-width: fit-content;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.wa__programs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.wa__card {
+    width: calc(33% - 62px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.wa__card__title {
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.wa__card__details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+.wa__card__details>div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wa__card__details dt {
+    font-weight: 600;
+}
+
+.wa__card__details dt,
+.wa__card__details dd {
+    color: #333;
+    font-size: 16px;
+    margin: 0;
+}
+
+.wa__card__status {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.wa__card__status--available {
+    color: #267a3d;
+}
+
+.wa__card__status--few_left {
+    color: #a15c00;
+}
+
+.wa__card__status--full,
+.wa__card__status--cancelled,
+.wa__card__status--past,
+.wa__card__status--unavailable {
+    color: #777;
+}
+
+.wa__card__cta {
+    width: 100%;
+    margin-top: auto;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 4px;
+    background: #333;
+    color: #fff;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.wa__card__cta:hover:not(:disabled) {
+    background: #222;
+}
+
+.wa__card__cta:disabled {
+    background: #ddd;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.wa__loading,
+.wa__empty,
+.wa__error {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
+
+@media (max-width: 1199px) {
+    .wa__card {
+        width: calc(50% - 62px);
+    }
+
+    .wa__section{
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .wa__card {
+        width: 100%;
+    }
 }

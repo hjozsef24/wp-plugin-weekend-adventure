@@ -34,7 +34,7 @@ class WA_Shortcode
 	public function render()
 	{
 		return '
-		<section class="wa" aria-labelledby="wa-title">
+		<section class="wa__section" aria-labelledby="wa-title">
 			<h2 id="wa-title" class="wa__title">Hétvégi Kalandmentő</h2>
 
 			<div class="wa__filter js-filter-wrapper">
