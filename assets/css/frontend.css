@@ -2,3 +2,7 @@
 	font-size: 32px;
 	color: #333;
 }
+
+.wa__filter{
+    display: none;
+}

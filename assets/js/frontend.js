@@ -27,18 +27,23 @@ const programList = ($) => {
 
 	if (!container.length) return;
 
+	const difficultyFilter = $('.js-filter');
+	const difficultyFilterWrapper = $('.js-filter-wrapper');
+
+	let programs = [];
+
 	$.ajax({
 		url: '/wp-json/wa/v1/programs',
 		method: 'GET',
-		success: function (programs) {
-			if (!programs.length) {
-				container.html(
-					'<p class="wa__empty">Jelenleg nincs elérhető program.</p>'
-				);
+		success: function (data) {
+			programs = data;
 
+			if (!programs.length) {
+				container.html('<p class="wa__empty">Jelenleg nincs elérhető program.</p>');
 				return;
 			}
 
+			difficultyFilterWrapper.css("display", "block")
 			container.html(
 				programs.map(renderProgramCard).join('')
 			);
@@ -50,6 +55,28 @@ const programList = ($) => {
 				'<p class="wa__error">A programok betöltése sikertelen. Kérjük, próbáld újra később.</p>'
 			);
 		},
+	});
+
+	difficultyFilter.on('change', function () {
+		const selectedDifficulty = $(this).val();
+
+		console.log(selectedDifficulty);
+
+		const filteredPrograms = selectedDifficulty
+			? programs.filter((program) => program.difficulty === selectedDifficulty)
+			: programs;
+
+		if (!filteredPrograms.length) {
+			container.html(
+				'<p class="wa__empty">Nincs a szűrésnek megfelelő program.</p>'
+			);
+
+			return;
+		}
+
+		container.html(
+			filteredPrograms.map(renderProgramCard).join('')
+		);
 	});
 };
 

@@ -37,6 +37,17 @@ class WA_Shortcode
 		<section class="wa" aria-labelledby="wa-title">
 			<h2 id="wa-title" class="wa__title">Hétvégi Kalandmentő</h2>
 
+			<div class="wa__filter js-filter-wrapper">
+				<label for="wa-difficulty">Nehézség</label>
+
+				<select id="wa-difficulty" class="js-filter">
+					<option value="">Összes</option>
+					<option value="könnyű">Könnyű</option>
+					<option value="közepes">Közepes</option>
+					<option value="nehéz">Nehéz</option>
+				</select>
+			</div>
+
 			<div class="wa__programs js-programs-container">
 				<p class="wa__loading">Programok betöltése...</p>
 			</div>
