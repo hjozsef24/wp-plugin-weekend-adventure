@@ -18,12 +18,14 @@ define('WA_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WA_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 require_once WA_PLUGIN_DIR . 'includes/class-shortcode.php';
+require_once WA_PLUGIN_DIR . 'includes/class-program-data.php';
 
 /*
 ** Initialize the plugin
 */
 function init_wa()
 {
+	new WA_Program_Data();
 	new WA_Shortcode();
 }
 

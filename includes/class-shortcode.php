@@ -33,6 +33,10 @@ class WA_Shortcode
 
 	public function render()
 	{
-		return '<h2 class="wa__title">Hétvégi Kalandmentő</h2>';
+		$repository = new WA_Program_Data();
+
+		$programs = $repository->get_programs();
+
+		return '<pre>' . esc_html(print_r($programs, true)) . '</pre>';
 	}
 }
