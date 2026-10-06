@@ -6,41 +6,68 @@ if (! defined('ABSPATH')) {
 
 class WA_Program_Status
 {
-
-	public function get_status(array $program, string $reference_time): string
+	public function get_status(array $program, string $reference_time): array
 	{
 		if ($program['cancelled']) {
-			return 'cancelled';
+			return [
+				'key'      => 'cancelled',
+				'label'    => 'Törölve',
+				'bookable' => false,
+			];
 		}
 
 		if ($program['capacity'] <= 0) {
-			return 'unavailable';
+			return [
+				'key'      => 'unavailable',
+				'label'    => 'Nem elérhető',
+				'bookable' => false,
+			];
 		}
 
 		try {
 			$start_at = new DateTimeImmutable($program['start_at']);
 			$reference = new DateTimeImmutable($reference_time);
 		} catch (Exception $e) {
-			return 'unavailable';
+			return [
+				'key'      => 'unavailable',
+				'label'    => 'Nem elérhető',
+				'bookable' => false,
+			];
 		}
 
 		if ($start_at <= $reference) {
-			return 'past';
+			return [
+				'key'      => 'past',
+				'label'    => 'Lejárt',
+				'bookable' => false,
+			];
 		}
 
 		$capacity = (int) $program['capacity'];
 		$booked   = (int) $program['booked'];
 
 		if ($booked >= $capacity) {
-			return 'full';
+			return [
+				'key'      => 'full',
+				'label'    => 'Betelt',
+				'bookable' => false,
+			];
 		}
 
 		$remaining = $capacity - $booked;
 
 		if ($remaining <= $capacity * 0.20) {
-			return 'few_left';
+			return [
+				'key'      => 'few_left',
+				'label'    => 'Kevés hely',
+				'bookable' => true,
+			];
 		}
 
-		return 'available';
+		return [
+			'key'      => 'available',
+			'label'    => 'Elérhető',
+			'bookable' => true,
+		];
 	}
 }

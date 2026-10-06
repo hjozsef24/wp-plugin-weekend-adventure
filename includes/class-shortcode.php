@@ -25,7 +25,7 @@ class WA_Shortcode
 		wp_enqueue_script(
 			'wa-frontend',
 			WA_PLUGIN_URL . 'assets/js/frontend.js',
-			[],
+			['jquery'],
 			WA_VERSION,
 			true
 		);
@@ -33,30 +33,14 @@ class WA_Shortcode
 
 	public function render()
 	{
-		$data = new WA_Program_Data();
-		$status = new WA_Program_Status();
+		return '
+		<section class="wa" aria-labelledby="wa-title">
+			<h2 id="wa-title" class="wa__title">Hétvégi Kalandmentő</h2>
 
-		$programs = $data->get_programs();
-		$reference_time = $data->get_reference_time();
-
-		$result = [];
-
-		foreach ($programs as $program) {
-			$result[] = [
-				'id'     => $program['id'] ?? null,
-				'title'  => $program['title'] ?? null,
-				'status' => $status->get_status(
-					$program,
-					$reference_time
-				),
-			];
-		}
-
-		return sprintf(
-			'<pre>%s</pre>',
-			esc_html(
-				print_r($result, true)
-			)
-		);
+			<div class="wa__programs js-programs-container">
+				<p class="wa__loading">Programok betöltése...</p>
+			</div>
+		</section>
+	';
 	}
 }
