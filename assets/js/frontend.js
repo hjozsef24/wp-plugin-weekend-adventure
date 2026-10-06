@@ -77,8 +77,6 @@ const programList = ($) => {
 	difficultyFilter.on('change', function () {
 		const selectedDifficulty = $(this).val();
 
-		console.log(selectedDifficulty);
-
 		const filteredPrograms = selectedDifficulty
 			? programs.filter((program) => program.difficulty === selectedDifficulty)
 			: programs;

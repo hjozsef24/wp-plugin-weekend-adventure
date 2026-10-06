@@ -63,7 +63,9 @@ class WA_REST_API_Controller
 
 		foreach ($result as &$program) {
 			$program['start_at'] = wp_date('Y. F j. H:i', strtotime($program['start_at']));
-			$program['price_huf'] = number_format($program['price_huf'], 0, ',', ' ') . ' Ft';
+			$program['price_huf'] = $program['price_huf'] === 0 ? 
+            "Ingyenes" : 
+            number_format($program['price_huf'], 0, ',', ' ') . ' Ft';
 		}
 
 		unset($program);
