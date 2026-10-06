@@ -33,10 +33,30 @@ class WA_Shortcode
 
 	public function render()
 	{
-		$repository = new WA_Program_Data();
+		$data = new WA_Program_Data();
+		$status = new WA_Program_Status();
 
-		$programs = $repository->get_programs();
+		$programs = $data->get_programs();
+		$reference_time = $data->get_reference_time();
 
-		return '<pre>' . esc_html(print_r($programs, true)) . '</pre>';
+		$result = [];
+
+		foreach ($programs as $program) {
+			$result[] = [
+				'id'     => $program['id'] ?? null,
+				'title'  => $program['title'] ?? null,
+				'status' => $status->get_status(
+					$program,
+					$reference_time
+				),
+			];
+		}
+
+		return sprintf(
+			'<pre>%s</pre>',
+			esc_html(
+				print_r($result, true)
+			)
+		);
 	}
 }
